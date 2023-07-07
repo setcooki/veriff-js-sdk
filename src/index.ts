@@ -5,7 +5,7 @@ import { createSession } from './xhr';
 interface Options {
   host?: string;
   apiKey: string;
-  parentId: string;
+  parent: HTMLElement;
   onSession: (err, response) => void;
 }
 
@@ -22,7 +22,7 @@ interface Params {
 }
 
 const Veriff = (options: Options) => {
-  const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
+  const { host = 'https://api.veriff.me', apiKey, parent, onSession } = options;
   const onSessionCallback = onSession;
   let mountedOptions: MountOptions = { loadingText: 'Loading...', submitBtnText: 'Start Verification' };
   let params: Params = {
@@ -68,7 +68,7 @@ const Veriff = (options: Options) => {
     mountedOptions = { ...mountedOptions, ...mountOptions };
     const { formLabel, loadingText, submitBtnText } = mountedOptions;
     const { person, vendorData } = params;
-    const form = createTemplate(parentId, {
+    const form = createTemplate(parent, {
       person,
       vendorData,
       formLabel,

@@ -29,6 +29,7 @@ export interface InputCreationOptions {
   name: string;
   label?: string;
   required: boolean;
+
 }
 
 export function createInput(opts: InputCreationOptions) {
@@ -106,11 +107,10 @@ export interface Options {
   submitBtnText?: string;
 }
 
-export function createTemplate(parentId: string, options: Options) {
+export function createTemplate(parent: HTMLElement, options: Options) {
   const { formLabel = defaultFormLabel, person = defaultPerson, vendorData, submitBtnText } = options;
-  const parent = document.getElementById(parentId);
   if (!parent) {
-    throw new Error(`Element ${parentId} does not exists`);
+    throw new Error(`Element parent is not a valid element`);
   }
 
   const fontLink = document.createElement('link');
